@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< current
-=======
-<canvas id="myCanvas" width="200" height="100"
-style="border:1px solid #000000;">
-</canvas>
->>>>>>> before discard
-=======
-=======
-
->>>>>>> a40983acb83995f2c81cdcb25ca2e0a928addf7a
 <html>
 
 <head>
@@ -51,14 +39,14 @@ var rightPressed = false;
 var leftPressed = false;
 var brickrowCount = 7;
 var brickWidth = 75;
-var brickPadding = 10;
+var brickPadding = 15;
 var brickOffsetLeft = 30;
 var choose=0;
 var row=0;
 var col=0
 var highScore=0;
-var brickcolumnCount = (canvas.width-(brickOffsetLeft*2))/brickWidth;
-brickcolumnCount=parseInt(brickcolumnCount)-1;
+var brickcolumnCount = (canvas.width-(brickOffsetLeft*2)-brickWidth)/brickWidth;
+brickcolumnCount = parseInt(brickcolumnCount)-1;
 var brickHeight = 20;
 var paddleWidth = 125+(0.03*canvas.width);
 var paddleHeight = 10;
@@ -132,6 +120,8 @@ function collisionDetection() {
               }
               if (bricks[c][r].status==false){
                   blocksDestroyed+=1;
+                  if (blocksDestroyed>highScore)
+                    highScore=blocksDestroyed;
               if (bricks[c][r].powerupCon==true){
                   powerUp(c,r);}}
               }
@@ -196,11 +186,12 @@ function Reset(){
         {for(var r=0; r<brickrowCount; r++)
           {bricks[c][r].status=true;
           bricks[c][r].powerupCon=PowerUpAssign(); }
-  blocksDestroyed=0;
-  paddleWidth = 125+(0.03*canvas.width);
-  color=parseInt(Math.random()*5);
 }
+paddleWidth = 125+(0.03*canvas.width);
+color=parseInt(Math.random()*5);
+blocksDestroyed=0;
 }
+
 function powerUp(col, row){
   choose=Math.random()*4;
   choose=parseInt(choose);
@@ -253,11 +244,12 @@ function drawScore() {
     ctx.font = "16px Century Gothic";
     ctx.fillStyle = "#0095DD";
     ctx.fillText("Score: "+ blocksDestroyed, 8, 20);
+    ctx.fillText("HighScore: "+ highScore, canvas.width-180, 20);
 }
 function winCheck(){
   if(blocksDestroyed==blocksDestroy){
-      alert("VICTORY ROYALE");
       Reset();
+      alert("VICTORY ROYALE, You Won with " + blocksDestroyed + " Points");
   }
 }
 
@@ -279,9 +271,7 @@ function keyUpHandler(e) {
         leftPressed = false;
     }
 }
-setInterval(draw, 1);
+setInterval(draw, 2);
 </script>
 </body>
-
 </html>
->>>>>>> 3a9e787a714af77e24eede376d1e08f547dfd701
