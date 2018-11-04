@@ -1,4 +1,13 @@
-let canvas = document.getElementById("canvas");
-let context = canvas.getContext("2d");
-canvas.width = window.innerWidth*(.75);
-canvas.height = window.innerHeight*(.85);
+
+var x = document.createElement("CANVAS");
+var ctx = x.getContext("2d");
+x.width = window.innerWidth;
+x.height = window.innerHeight;
+function draw() {
+  ctx.beginPath();
+  ctx.arc(50, 50, 10, 0, Math.PI*2);
+  ctx.fillStyle = "#0095DD";
+  ctx.fill();
+  ctx.closePath();
+}
+setInterval(draw, 10);
